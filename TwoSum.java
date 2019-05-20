@@ -1,8 +1,7 @@
 /**
  * Function:{1,3,5,7} target=8 返回{2,3}
  *
- * @author crossoverJie
- *         Date: 04/01/2018 09:53
+ * @author 张伯雨
  * @since JDK 1.8
  */
 public class TwoSum {
