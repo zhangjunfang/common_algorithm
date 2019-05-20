@@ -1,31 +1,31 @@
 public class RedPacket {
 
     /**
-     * Éú³Éºì°ü×îĞ¡Öµ 1·Ö
+     * ç”Ÿæˆçº¢åŒ…æœ€å°å€¼ 1åˆ†
      */
     private static final int MIN_MONEY = 1;
 
     /**
-     * Éú³Éºì°ü×î´óÖµ 200ÈËÃñ±Ò
+     * ç”Ÿæˆçº¢åŒ…æœ€å¤§å€¼ 200äººæ°‘å¸
      */
     private static final int MAX_MONEY = 200 * 100;
 
     /**
-     * Ğ¡ÓÚ×îĞ¡Öµ
+     * å°äºæœ€å°å€¼
      */
     private static final int LESS = -1;
     /**
-     * ´óÓÚ×î´óÖµ
+     * å¤§äºæœ€å¤§å€¼
      */
     private static final int MORE = -2;
 
     /**
-     * Õı³£Öµ
+     * æ­£å¸¸å€¼
      */
     private static final int OK = 1;
 
     /**
-     * ×î´óµÄºì°üÊÇÆ½¾ùÖµµÄ TIMES ±¶£¬·ÀÖ¹Ä³Ò»´Î·ÖÅäºì°ü½Ï´ó
+     * æœ€å¤§çš„çº¢åŒ…æ˜¯å¹³å‡å€¼çš„ TIMES å€ï¼Œé˜²æ­¢æŸä¸€æ¬¡åˆ†é…çº¢åŒ…è¾ƒå¤§
      */
     private static final double TIMES = 2.1F;
 
@@ -34,22 +34,22 @@ public class RedPacket {
     public List<Integer> splitRedPacket(int money, int count) {
         List<Integer> moneys = new LinkedList<>();
 
-        //½ğ¶î¼ì²é£¬Èç¹û×î´óºì°ü * ¸öÊı < ×Ü½ğ¶î£»ÔòĞèÒªµ÷´ó×îĞ¡ºì°ü MAX_MONEY
+        //é‡‘é¢æ£€æŸ¥ï¼Œå¦‚æœæœ€å¤§çº¢åŒ… * ä¸ªæ•° < æ€»é‡‘é¢ï¼›åˆ™éœ€è¦è°ƒå¤§æœ€å°çº¢åŒ… MAX_MONEY
         if (MAX_MONEY * count <= money) {
-            System.err.println("Çëµ÷´ó×îĞ¡ºì°ü½ğ¶î MAX_MONEY=[" + MAX_MONEY + "]");
+            System.err.println("è¯·è°ƒå¤§æœ€å°çº¢åŒ…é‡‘é¢ MAX_MONEY=[" + MAX_MONEY + "]");
             return moneys ;
         }
 
 
-        //¼ÆËã³ö×î´óºì°ü
+        //è®¡ç®—å‡ºæœ€å¤§çº¢åŒ…
         int max = (int) ((money / count) * TIMES);
         max = max > MAX_MONEY ? MAX_MONEY : max;
 
         for (int i = 0; i < count; i++) {
-            //Ëæ»ú»ñÈ¡ºì°ü
+            //éšæœºè·å–çº¢åŒ…
             int redPacket = randomRedPacket(money, MIN_MONEY, max, count - i);
             moneys.add(redPacket);
-            //×Ü½ğ¶îÃ¿´Î¼õÉÙ
+            //æ€»é‡‘é¢æ¯æ¬¡å‡å°‘
             money -= redPacket;
         }
 
@@ -57,7 +57,7 @@ public class RedPacket {
     }
 
     private int randomRedPacket(int totalMoney, int minMoney, int maxMoney, int count) {
-        //Ö»ÓĞÒ»¸öºì°üÖ±½Ó·µ»Ø
+        //åªæœ‰ä¸€ä¸ªçº¢åŒ…ç›´æ¥è¿”å›
         if (count == 1) {
             return totalMoney;
         }
@@ -66,22 +66,22 @@ public class RedPacket {
             return minMoney;
         }
 
-        //Èç¹û×î´ó½ğ¶î´óÓÚÁËÊ£Óà½ğ¶î ÔòÓÃÊ£Óà½ğ¶î ÒòÎªÕâ¸ö money Ã¿·ÖÅäÒ»´Î¶¼»á¼õĞ¡
+        //å¦‚æœæœ€å¤§é‡‘é¢å¤§äºäº†å‰©ä½™é‡‘é¢ åˆ™ç”¨å‰©ä½™é‡‘é¢ å› ä¸ºè¿™ä¸ª money æ¯åˆ†é…ä¸€æ¬¡éƒ½ä¼šå‡å°
         maxMoney = maxMoney > totalMoney ? totalMoney : maxMoney;
 
-        //ÔÚ minMoneyµ½maxMoney Éú³ÉÒ»¸öËæ»úºì°ü
+        //åœ¨ minMoneyåˆ°maxMoney ç”Ÿæˆä¸€ä¸ªéšæœºçº¢åŒ…
         int redPacket = (int) (Math.random() * (maxMoney - minMoney) + minMoney);
 
         int lastMoney = totalMoney - redPacket;
 
         int status = checkMoney(lastMoney, count - 1);
 
-        //Õı³£½ğ¶î
+        //æ­£å¸¸é‡‘é¢
         if (OK == status) {
             return redPacket;
         }
 
-        //Èç¹ûÉú³ÉµÄ½ğ¶î²»ºÏ·¨ Ôòµİ¹éÖØĞÂÉú³É
+        //å¦‚æœç”Ÿæˆçš„é‡‘é¢ä¸åˆæ³• åˆ™é€’å½’é‡æ–°ç”Ÿæˆ
         if (LESS == status) {
             recursiveCount++;
             System.out.println("recursiveCount==" + recursiveCount);
@@ -98,7 +98,7 @@ public class RedPacket {
     }
 
     /**
-     * Ğ£ÑéÊ£ÓàµÄ½ğ¶îµÄÆ½¾ùÖµÊÇ·ñÔÚ ×îĞ¡ÖµºÍ×î´óÖµÕâ¸ö·¶Î§ÄÚ
+     * æ ¡éªŒå‰©ä½™çš„é‡‘é¢çš„å¹³å‡å€¼æ˜¯å¦åœ¨ æœ€å°å€¼å’Œæœ€å¤§å€¼è¿™ä¸ªèŒƒå›´å†…
      *
      * @param lastMoney
      * @param count
