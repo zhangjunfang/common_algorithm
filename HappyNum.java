@@ -19,8 +19,7 @@
  * 2*2+0*0=2
  *
  * 这里结果 1*1+1*1=2 和 2*2+0*0=2 重复，所以不是快乐数字
- * @author crossoverJie
- *         Date: 04/01/2018 14:12
+ * @author 张伯雨
  * @since JDK 1.8
  */
 public class HappyNum {
